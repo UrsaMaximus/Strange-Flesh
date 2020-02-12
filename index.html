@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Strange Flesh</title>
+    <link rel="stylesheet" href="StrangeFlesh.css">
+    <script src="StrangeFlesh.js"></script>
+  </head>
+  <body onload="StrangeFlesh();">
+	<canvas id="gameCanvas" class="gameCanvas">
+		Your computer is a potato. For maximum enjoyment, cook and eat.
+	</canvas>
+	<div id="caption">
+		<input id="enableSmoothingCheckbox" type="checkbox" name="enableSmoothing" onclick="enableSmoothingCheckChanged();"> Enable Smoothing</input> - | -
+		<input id="debugCheckbox" type="checkbox" name="debug" onclick="debugCheckChanged();"> Show Debug Graphics</input> - | -
+		Import Level: <input type="file" id="levelLoader" /><br \>
+	</div>
+  </body>
+</html>

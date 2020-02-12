@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Strange Flesh Level Editor</title>
+    <link rel="stylesheet" href="StrangeEdit.css">
+    <script src="StrangeEdit.js"></script>
+  </head>
+  <body onload="StrangeEdit();">
+  
+	<canvas id="gameCanvas">
+		Your computer is a potato. For maximum enjoyment, cook and eat.
+	</canvas>
+
+<div class="FixedWidthContainer">
+  <div class="fixedHeightHeader">Properties</div>
+  <div class="Content" id="editPanel">
+  	<div class="property">No object selected</div>
+  </div>
+</div>
+
+<div style="clear: both;"></div>
+
+	<div class="SingleWidthContainer">
+	  <div class="fixedHeightHeader">Actions</div>
+  		<div class="ContentBottom">
+  			<button onclick="newLevel();">New Level</button><br \>
+  			<button onclick="loadNumberedLevel(0);">Open Level 0</button><br \>
+  			<button onclick="loadNumberedLevel(1);">Open Level 1</button><br \>
+  			<button onclick="loadNumberedLevel(2);">Open Level 2</button><br \>
+  			<button onclick="loadNumberedLevel(3);">Open Level 3</button><br \>
+  			<button onclick="loadNumberedLevel(4);">Open Level 4</button><br \>
+  			<button onclick="loadNumberedLevel(5);">Open Level 5</button><br \>
+  			<button onclick="loadNumberedLevel(6);">Open Level 6</button><br \><br \>
+  			<button onclick="saveLevel();">Save Level File</button><br \><br \>
+  			Import From File: <input type="file" id="levelLoader" /><br \>
+		</div>
+	</div>
+
+	<div class="SingleWidthContainer">
+	  <div class="fixedHeightHeader">View</div>
+  		<div class="ContentBottom">
+  			<div class="property">
+  			
+  				<div class="propertyName">
+  					Collision Debug:
+  				</div>
+  				<div class="propertyValue">
+					<input id="collisionCheckbox" type="checkbox" name="collision" onclick="collisionCheckChanged();"></input>
+				</div>
+			</div>
+			
+			<div class="property">
+  				<div class="propertyName">
+  					Test Camera Collision:
+  				</div>
+  				<div class="propertyValue">
+					<input id="testCameraCheckbox" type="checkbox" name="testCamera" onclick="testCameraCheckChanged();"></input>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<div class="SingleWidthContainer">
+	  <div class="fixedHeightHeader">Layers</div>
+  		<div class="ContentBottom">
+  			
+  			<input id="foregroundCheckbox" type="checkbox" name="foreground" onclick="foregroundCheckChanged();" checked>
+			<label><input id="foregroundRadioButton" name="layerSelection" type="radio" onclick="layerChanged();">Foreground</label>
+			<br />
+			
+			<input id="entitiesCheckbox" type="checkbox" name="entities" onclick="entitiesCheckChanged();" checked>
+			<label><input id="entitiesRadioButton" name="layerSelection" type="radio" onclick="layerChanged();" checked>Entities</label>
+			<br />
+			
+			<input id="backgroundCheckbox" type="checkbox" name="background" onclick="backgroundCheckChanged();" checked>
+			<label><input id="backgroundRadioButton" name="layerSelection" type="radio" onclick="layerChanged();">Background</label>
+			<br />
+			
+			<input id="staticCollisionCheckbox" type="checkbox" name="staticCollision" onclick="staticCollisionCheckChanged();" checked>
+			<label><input id="staticCollisionRadioButton" name="layerSelection" type="radio" onclick="layerChanged();">Static Collision</label>
+			<br />
+			
+			<input id="cameraCollisionCheckbox" type="checkbox" name="cameraCollision" onclick="cameraCollisionCheckChanged();">
+			<label><input id="cameraCollisionRadioButton" name="layerSelection" type="radio" onclick="layerChanged();">Camera Collision</label>
+			<br />
+			
+			<input id="skirmishCheckbox" type="checkbox" name="skirmish" onclick="skirmishCheckChanged();">
+			<label><input id="skirmishRadioButton" name="layerSelection" type="radio" onclick="layerChanged();">Skirmishes</label>
+			<br />
+			
+			<input id="transitionCheckbox" type="checkbox" name="transition" onclick="transitionCheckChanged();" checked>
+			<label><input id="transitionRadioButton" name="layerSelection" type="radio" onclick="layerChanged();">Level Transitions</label>
+			<br />
+			
+		</div>
+	</div>
+	
+
+	<div class="SingleWidthContainer">
+	  <div class="fixedHeightHeader">Insert</div>
+  		<div class="ContentBottom" id="insertPanel">
+  			<button>RepeatingTile</button>
+		</div>
+	</div>
+			
+
+  </body>
+</html>

@@ -1,0 +1,28 @@
+Strange Flesh Troubleshooting - Windows
+
+	-How do I play Strange Flesh?-
+
+Run "Strange Flesh.exe". That's it!
+
+	-Strange Flesh is running like crap-
+
+Well... this is embarrassing for a simple 2D game! There are a few things you can try. First, if you're on a Surface, SurfaceBook, or some other high DPI Windows 10 machine with a weak GPU, try this. Open the "Game Files" directory and find "Strange Flesh.exe". Right click and go to "Properties". Under the "Compatibility" tab, check "Override high DPI scaling behavior" and select the option "System" in the dropdown.
+
+Failing that, try setting your display resolution to 1920x1080 or lower, with no UI scaling and see if the game runs better then. 
+
+Strange Flesh uses software drawing and you can get TERRIBLE performance if your computer decides to draw in a certain way.
+
+	-Strange Flesh won't run at all! What do I do?!-
+
+Strange Flesh runs using an application framework called Electron. 
+Electron requires Windows 7 or higher, a 64 bit processor, and 2GB of RAM. 
+If you don't meet the requirements, you can try the web version but I doubt 
+that'll run either if you don't meet these requirements!
+
+	-Strange Flesh still won't run, my problem is something else!-
+
+Sorry, I'm not sure what to say. In our testing, we didn't find a single 
+system that failed to run the game. If you're getting crashes or launch failures, 
+you could start searching for problems running apps based on the Electron framework. 
+
+< https://electron.atom.io >

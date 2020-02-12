@@ -1,0 +1,102 @@
+body 
+{
+   background: #000000;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   color:#553c1c;
+}
+
+.caption
+{
+	text-align:left;
+	float: left;
+	display: block;
+	margin-left: auto ;
+  	margin-right: auto ;
+}
+
+.fixedHeightHeader
+{
+	text-align:center;
+	display: block;
+	margin-left: auto ;
+  	margin-right: auto ;
+  	margin-bottom: 8px;
+  	clear: both;
+}
+ 
+ 
+.property
+{
+	display: block;
+  	clear: both;
+  	width: 5000px;
+}
+
+.propertyName
+{
+	display:block;
+	float:left;
+	min-width:80px;
+	text-align:right;
+	margin-right:4px;
+	font-weight:900;
+}
+
+.propertyValue
+{
+	display: block;
+	text-align:left;
+	float: left;
+	margin-left:4px;
+}
+
+#gameCanvas
+{
+	float: left;
+	display: block;
+}
+
+.FixedWidthContainer
+{
+  float:right;
+  width:280px; 
+  padding:8px; 
+  background:#AAA;
+  margin-left:4px;
+  margin-right:4px;
+}
+
+.SingleWidthContainer
+{
+  float:left;
+  display: block;
+  margin-right:4px;
+  margin-top:4px;
+  padding:8px; 
+  background:#AAA;
+  width:250px; 
+}
+
+.DoubleWidthContainer
+{
+  float:right;
+  display: block;
+  margin-top:4px;
+  padding:8px; 
+  background:#AAA;
+  width:46vw; 
+}
+
+.Content
+{
+   overflow:auto;
+   background:#fff;
+}
+
+.ContentBottom
+{
+   overflow:auto;
+   background:#fff;
+   height:190px;
+}

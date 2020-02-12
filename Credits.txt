@@ -1,0 +1,21 @@
+                 CREDITS
+
+      -Programming and Game Design-
+               Ursa Maximus
+
+         -Art and Game Design-
+             blazing cheeks
+
+            -Music and SFX-
+                 Fann
+
+              -Voicework-
+           Aaron "HumDog" Scott
+               bearpad
+
+
+Strange Flesh uses the font Alagard by Pix3M
+pix3m.deviantart.com
+
+We also use StackBlur.js, written by Mario Klingemann
+www.quasimondo.com

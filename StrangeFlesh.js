@@ -11,8 +11,8 @@
 
 if (typeof(process) !== "undefined" && process.versions.electron)
 {
-	var app = require('electron').remote.app;
-	var remote = require('electron').remote;
+    app = require('@electron/remote').app;
+	BrowserWindow = require('@electron/remote').BrowserWindow;
 }
 
 // Some globals that our includes might want to use
@@ -417,14 +417,14 @@ function loadGame()
 
 function saveSettings()
 {
-	if (remote)
+	if (BrowserWindow)
 	{
 		if (!settings.fullscreenMode)
 		{
-			settings.windowLocationX = remote.getCurrentWindow().x;
-			settings.windowLocationY = remote.getCurrentWindow().y;
-			settings.windowSizeX = remote.getCurrentWindow().width;
-			settings.windowSizeY = remote.getCurrentWindow().height;
+			settings.windowLocationX = BrowserWindow.getFocusedWindow().x;
+			settings.windowLocationY = BrowserWindow.getFocusedWindow().y;
+			settings.windowSizeX = BrowserWindow.getFocusedWindow().width;
+			settings.windowSizeY = BrowserWindow.getFocusedWindow().height;
 		}
 	}
 	var settingsString = JSON.stringify(settings);
@@ -1128,9 +1128,9 @@ function updateAll()
 	
 	if (windowSettingsStale)
 	{
-		if (remote)
+		if (BrowserWindow)
 		{
-			remote.getCurrentWindow().setFullScreen(settings.fullscreenMode);				
+			BrowserWindow.getFocusedWindow().setFullScreen(settings.fullscreenMode);				
 			windowSettingsStale = false;
 			if (!settings.fullscreenMode)
 				windowSizeStale = true;
@@ -1145,10 +1145,10 @@ function updateAll()
 	{
 		try 
 		{
-			if (remote)
+			if (BrowserWindow)
 			{
-				remote.getCurrentWindow().setPosition(settings.windowLocationX,settings.windowLocationY);
-				remote.getCurrentWindow().setSize(settings.windowSizeX,settings.windowSizeY);
+				BrowserWindow.getFocusedWindow().setPosition(settings.windowLocationX,settings.windowLocationY);
+				BrowserWindow.getFocusedWindow().setSize(settings.windowSizeX,settings.windowSizeY);
 			}
 			windowSizeStale = false;
 		}

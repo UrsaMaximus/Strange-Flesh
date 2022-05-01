@@ -268,7 +268,7 @@ MainMenu.prototype.Draw = function()
 	sstext.fillStyle = "#FFF";
 	sstext.alpha = 0.5;
 	
-	sstext.DrawText("v1.4", linearRemap(menuAnim,0,1,557,367), linearRemap(menuAnim,0,1,193,145), 16);
+	sstext.DrawText("v1.5", linearRemap(menuAnim,0,1,557,367), linearRemap(menuAnim,0,1,193,145), 16);
 	
 	// And finally the press any key pulsing message
 	if (this.menuMode)

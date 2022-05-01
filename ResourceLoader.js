@@ -668,8 +668,8 @@ function ResourceLoader()
 	
 	this.errorMessages = [];
 	
-	this.iOS = true;///iPad|iPhone|iPod/.test(navigator.platform);
-	this.webAudioLocked = true;//this.iOS;
+	this.iOS = true;
+	this.webAudioLocked = !(typeof(process) != "undefined" && process.versions.electron);
 	
 	if (this.iOS)
 	{

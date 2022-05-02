@@ -49,6 +49,18 @@ PlayerInputController.prototype.resetBindings = function()
 	settings.jumpKeyCode = 32;
 	settings.startKeyCode = 13;
 
+    // Controller binds
+    this.upButtonMonitor.SetConfig([0, 12, 0]);
+    this.downButtonMonitor.SetConfig([0, 13, 0]);
+    this.leftButtonMonitor.SetConfig([0, 14, 0]);
+    this.rightButtonMonitor.SetConfig([0, 15, 0]);
+    this.punchButtonMonitor.SetConfig([0, 0, 0 ]);
+    this.smokeButtonMonitor.SetConfig([0, 1, 0 ]);
+    this.grabButtonMonitor.SetConfig([0, 2, 0 ]);
+    this.specialButtonMonitor.SetConfig([0, 4, 0 ]);
+    this.jumpButtonMonitor.SetConfig([0, 3, 0 ]);
+    this.startButtonMonitor.SetConfig([0, 9, 0 ]);
+
 	saveSettings();
 };
 

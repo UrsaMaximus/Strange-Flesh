@@ -411,13 +411,16 @@ SettingsMenu.prototype.Update = function()
 				
 				this.activateSound.Play();
 			}
-			else if (this.items[this.selectedItem].element === "keybind")
+		}
+
+        // Keybindsetting should activate on keyup
+        if (controller.startDeactivate() || controller.punchDeactivate())
+        {
+			if (this.items[this.selectedItem].element === "keybind")
 			{
 				this.items[this.selectedItem].onClick();
-				
-				//this.activateSound.Play();
 			}
-		}
+        }
 		
 		if (this.allowBackout && controller.smokeActivate())
 		{

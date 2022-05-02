@@ -218,13 +218,13 @@ function StrangeFlesh()
     camera = new CanvasCamera();
 	camera.clipEnabled = true;
 	resizeCanvas(false);
-    
-	// Load the settings
-	loadSettings();
 
 	// Setup the controller object to enhance keyboard input
 	controller = new PlayerInputController();
 	enableKeyInput();
+
+    // Load the settings
+	loadSettings();
 	
 	// Setup a timer to update the canvas on set intervals
 	var timerInterval = (1/fps)*1000;
@@ -427,6 +427,18 @@ function saveSettings()
 			settings.windowSizeY = BrowserWindow.getFocusedWindow().height;
 		}
 	}
+
+    settings["upButtonConfig"] = controller.upButtonMonitor.GetConfig();
+    settings["downButtonConfig"] = controller.downButtonMonitor.GetConfig();
+    settings["leftButtonConfig"] = controller.leftButtonMonitor.GetConfig();
+    settings["rightButtonConfig"] = controller.rightButtonMonitor.GetConfig();
+    settings["punchButtonConfig"] = controller.punchButtonMonitor.GetConfig();
+    settings["smokeButtonConfig"] = controller.smokeButtonMonitor.GetConfig();
+    settings["grabButtonConfig"] = controller.grabButtonMonitor.GetConfig();
+    settings["specialButtonConfig"] = controller.specialButtonMonitor.GetConfig();
+    settings["jumpButtonConfig"] = controller.jumpButtonMonitor.GetConfig();
+    settings["startButtonConfig"] = controller.startButtonMonitor.GetConfig();
+
 	var settingsString = JSON.stringify(settings);
 	localStorage.setItem("GameSettings", settingsString);	
 };
@@ -478,7 +490,19 @@ function loadSettings()
 						"grabKeyCode": 76,
 						"specialKeyCode": 186,
 						"jumpKeyCode": 32,
-						"startKeyCode": 13
+						"startKeyCode": 13,
+
+                        // Controller binds
+                        "upButtonConfig":      [0, 12, 0],
+						"downButtonConfig":    [0, 13, 0],
+						"leftButtonConfig":    [0, 14, 0],
+						"rightButtonConfig":   [0, 15, 0],
+						"punchButtonConfig":   [0, 0, 0 ],
+						"smokeButtonConfig":   [0, 1, 0 ],
+						"grabButtonConfig":    [0, 2, 0 ],
+						"specialButtonConfig": [0, 4, 0 ],
+						"jumpButtonConfig":    [0, 3, 0 ],
+						"startButtonConfig":   [0, 9, 0 ] 
 					};
 	
 	var settingsString = localStorage.getItem("GameSettings");
@@ -495,6 +519,18 @@ function loadSettings()
         		settings[property] = loadedSettings[property];
     		}
 		}
+
+        // Set the controller keybinds
+        controller.upButtonMonitor.SetConfig(settings["upButtonConfig"]);
+        controller.downButtonMonitor.SetConfig(settings["downButtonConfig"]);
+        controller.leftButtonMonitor.SetConfig(settings["leftButtonConfig"]);
+        controller.rightButtonMonitor.SetConfig(settings["rightButtonConfig"]);
+        controller.punchButtonMonitor.SetConfig(settings["punchButtonConfig"]);
+        controller.smokeButtonMonitor.SetConfig(settings["smokeButtonConfig"]);
+        controller.grabButtonMonitor.SetConfig(settings["grabButtonConfig"]);
+        controller.specialButtonMonitor.SetConfig(settings["specialButtonConfig"]);
+        controller.jumpButtonMonitor.SetConfig(settings["jumpButtonConfig"]);
+        controller.startButtonMonitor.SetConfig(settings["startButtonConfig"]);
 		
 		// Some of the properties changed needed a little kick to take effect immediately
 		GlobalMusic.setVolume(settings.musicLevelGameplay);
@@ -613,10 +649,6 @@ function enableTouchInput()
 	c.addEventListener('touchstart', touchStart, false);
 	c.addEventListener('touchend', touchEnd, false);
 };
-
-function gamepadConnected(args)
-{
-}
 
 function touchStart(evt) 
 {

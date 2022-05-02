@@ -15,20 +15,21 @@ function PlayerInputController()
 	
 	this.bindingKey = false;
 	this.keyToBind = -1;
+    this.buttonToBind = null;
 	
 	this.oneShotCallback = null;
 	
 	// Reset buttons
-	this.upButtonMonitor = new GamepadButtonMonitor(0, 12, controller, 0, PlayerInputController.prototype.upKeyUp, PlayerInputController.prototype.upKeyDown );
-	this.downButtonMonitor = new GamepadButtonMonitor(0, 13, controller, 0, PlayerInputController.prototype.downKeyUp, PlayerInputController.prototype.downKeyDown );
-	this.leftButtonMonitor = new GamepadButtonMonitor(0, 14, controller, 0, PlayerInputController.prototype.leftKeyUp, PlayerInputController.prototype.leftKeyDown );
-	this.rightButtonMonitor = new GamepadButtonMonitor(0, 15, controller, 0, PlayerInputController.prototype.rightKeyUp, PlayerInputController.prototype.rightKeyDown );
-	this.punchButtonMonitor = new GamepadButtonMonitor(0, 0, controller, 0, PlayerInputController.prototype.punchKeyUp, PlayerInputController.prototype.punchKeyDown );
-	this.smokeButtonMonitor = new GamepadButtonMonitor(0, 1, controller, 0, PlayerInputController.prototype.smokeKeyUp, PlayerInputController.prototype.smokeKeyDown );
-	this.grabButtonMonitor = new GamepadButtonMonitor(0, 2, controller, 0, PlayerInputController.prototype.grabKeyUp, PlayerInputController.prototype.grabKeyDown );
-	this.specialButtonMonitor = new GamepadButtonMonitor(0, 4, controller, 0, PlayerInputController.prototype.specialKeyUp, PlayerInputController.prototype.specialKeyDown );
-	this.jumpButtonMonitor = new GamepadButtonMonitor(0, 3, controller, 0, PlayerInputController.prototype.jumpKeyUp, PlayerInputController.prototype.jumpKeyDown );
-	this.startButtonMonitor = new GamepadButtonMonitor(0, 9, controller, 0, PlayerInputController.prototype.startKeyUp, PlayerInputController.prototype.startKeyDown );
+	this.upButtonMonitor = new GamepadButtonMonitor(0, 12, this, 0, PlayerInputController.prototype.upKeyUp, PlayerInputController.prototype.upKeyDown );
+	this.downButtonMonitor = new GamepadButtonMonitor(0, 13, this, 0, PlayerInputController.prototype.downKeyUp, PlayerInputController.prototype.downKeyDown );
+	this.leftButtonMonitor = new GamepadButtonMonitor(0, 14, this, 0, PlayerInputController.prototype.leftKeyUp, PlayerInputController.prototype.leftKeyDown );
+	this.rightButtonMonitor = new GamepadButtonMonitor(0, 15, this, 0, PlayerInputController.prototype.rightKeyUp, PlayerInputController.prototype.rightKeyDown );
+	this.punchButtonMonitor = new GamepadButtonMonitor(0, 0, this, 0, PlayerInputController.prototype.punchKeyUp, PlayerInputController.prototype.punchKeyDown );
+	this.smokeButtonMonitor = new GamepadButtonMonitor(0, 1, this, 0, PlayerInputController.prototype.smokeKeyUp, PlayerInputController.prototype.smokeKeyDown );
+	this.grabButtonMonitor = new GamepadButtonMonitor(0, 2, this, 0, PlayerInputController.prototype.grabKeyUp, PlayerInputController.prototype.grabKeyDown );
+	this.specialButtonMonitor = new GamepadButtonMonitor(0, 4, this, 0, PlayerInputController.prototype.specialKeyUp, PlayerInputController.prototype.specialKeyDown );
+	this.jumpButtonMonitor = new GamepadButtonMonitor(0, 3, this, 0, PlayerInputController.prototype.jumpKeyUp, PlayerInputController.prototype.jumpKeyDown );
+	this.startButtonMonitor = new GamepadButtonMonitor(0, 9, this, 0, PlayerInputController.prototype.startKeyUp, PlayerInputController.prototype.startKeyDown );
 	//this.resetBindings();
 	
 	this.usePermBindings = true;
@@ -50,6 +51,20 @@ PlayerInputController.prototype.resetBindings = function()
 
 	saveSettings();
 };
+
+PlayerInputController.prototype.buttonWasBound = function(evt)
+{
+    if (this.oneShotCallback !== null)
+	{
+		this.oneShotCallback(evt);
+		this.oneShotCallback = null;
+		return;
+	}
+	
+    this.bindingKey = false;
+    this.keyToBind = -1;
+    this.buttonToBind = null;
+}
 
 PlayerInputController.prototype.keyDown = function(evt)
 {
@@ -121,6 +136,8 @@ PlayerInputController.prototype.keyDown = function(evt)
 
 		this.bindingKey = false;
 		this.keyToBind = -1;
+        this.buttonToBind.bindMode = false;
+        this.buttonToBind = null;
 		return;
 	}
 	
@@ -306,6 +323,8 @@ PlayerInputController.prototype.bindUpKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 0;
+    this.buttonToBind = this.upButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindDownKey = function()
@@ -319,6 +338,8 @@ PlayerInputController.prototype.bindDownKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 1;
+    this.buttonToBind = this.downButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindLeftKey = function()
@@ -332,6 +353,8 @@ PlayerInputController.prototype.bindLeftKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 2;
+    this.buttonToBind = this.leftButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindRightKey = function()
@@ -345,6 +368,8 @@ PlayerInputController.prototype.bindRightKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 3;
+    this.buttonToBind = this.rightButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindPunchKey = function()
@@ -358,6 +383,8 @@ PlayerInputController.prototype.bindPunchKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 4;
+    this.buttonToBind = this.punchButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindSmokeKey = function()
@@ -371,6 +398,8 @@ PlayerInputController.prototype.bindSmokeKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 5;
+    this.buttonToBind = this.smokeButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindGrabKey = function()
@@ -384,6 +413,8 @@ PlayerInputController.prototype.bindGrabKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 6;
+    this.buttonToBind = this.grabButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindSpecialKey = function()
@@ -397,6 +428,8 @@ PlayerInputController.prototype.bindSpecialKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 9;
+    this.buttonToBind = this.specialButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindJumpKey = function()
@@ -410,6 +443,8 @@ PlayerInputController.prototype.bindJumpKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 7;
+    this.buttonToBind = this.jumpButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 PlayerInputController.prototype.bindStartKey = function()
@@ -423,10 +458,26 @@ PlayerInputController.prototype.bindStartKey = function()
 	
 	// Set something to say which key is being bound
 	this.keyToBind = 8;
+    this.buttonToBind = this.startButtonMonitor;
+    this.buttonToBind.bindMode = true;
 };
 
 // Inherit all this boilerplate from the standard controller object.
-PlayerInputController.prototype.update = Controller.prototype.update;
+PlayerInputController.prototype.update = function()
+{
+    Controller.prototype.update.call(this);
+
+    this.upButtonMonitor.Update();
+	this.downButtonMonitor.Update();
+	this.leftButtonMonitor.Update();
+	this.rightButtonMonitor.Update();
+	this.punchButtonMonitor.Update();
+	this.smokeButtonMonitor.Update();
+	this.grabButtonMonitor.Update();
+	this.specialButtonMonitor.Update();
+	this.jumpButtonMonitor.Update();
+	this.startButtonMonitor.Update();
+};
 
 PlayerInputController.prototype.upKeyUp = Controller.prototype.upKeyUp;
 PlayerInputController.prototype.downKeyUp = Controller.prototype.downKeyUp;
@@ -490,6 +541,7 @@ function GamepadButtonMonitor(gamepadID, index, controller, buttonType, keyUp, k
 	this.keyUp = keyUp;
 	this.keyDown = keyDown;
 	this.lastState = 0;
+    this.bindMode = false;
 };
 
 GamepadButtonMonitor.prototype.getName = function()
@@ -498,90 +550,111 @@ GamepadButtonMonitor.prototype.getName = function()
 	{
 		return "Button " + this.index.toString();
 	}
-	else if (this.buttonType === 2)
+	else if (this.buttonType === 1)
 	{
 		return "+Axis " + this.index.toString();
 	}
-	else if (this.buttonType === 3)
+	else if (this.buttonType === 2)
 	{
 		return "-Axis " + this.index.toString();
 	}
 };
 
+GamepadButtonMonitor.prototype.GetConfig = function()
+{
+    return [this.gamepadID, this.index, this.buttonType];
+}
+
+GamepadButtonMonitor.prototype.SetConfig = function(config)
+{
+    this.gamepadID = config[0];
+    this.index = config[1];
+    this.buttonType = config[2];
+}
+
 GamepadButtonMonitor.prototype.Update = function()
 {
 	if (gamepadSupportAvailable)
 	{
-		var gamepad = navigator.getGamepads()[this.gamepadID];
-		if (typeof gamepad !== 'undefined')
-		{
-			var collection = gamepad.buttons;
-			var state = 0;
-			if (this.buttonType !== 0)
-				collection = gamepad.axes
-		
-			if (this.index < collection.length)
-			{
-				if (this.buttonType === 0)
-					state = collection[this.index].value;
-				else
-					state = collection[this.index];
-				if (this.buttonType === 2)
-				{
-					if (this.lastState < -0.5 && state >= -0.5)
-					{
-						this.keyUp.call(this.controller);
-						PlayerInputController.prototype.anyKeyUp.call(this.controller);
-					}
-					else if (this.lastState >= -0.5 && state < -0.5)
-					{
-						this.keyDown.call(this.controller);
-						PlayerInputController.prototype.anyKeyDown.call(this.controller);
-					}
-				}
-				else
-				{
-					if (this.lastState > 0.5 && state <= 0.5)
-					{
-						this.keyUp.call(this.controller);
-						PlayerInputController.prototype.anyKeyUp.call(this.controller);
-					}
-					else if (this.lastState <= 0.5 && state > 0.5)
-					{
-						this.keyDown.call(this.controller);
-						PlayerInputController.prototype.anyKeyDown.call(this.controller);
-					}
-				}
-				this.lastState = state;
-			}
-		}
+        if (this.bindMode)
+        {
+            for (var gamepadID = 0; gamepadID < 4; gamepadID++) 
+            {
+                var gamepad = navigator.getGamepads()[gamepadID];
+                if (gamepad)
+                {
+                    for (var buttonID = 0; buttonID < gamepad.buttons.length; buttonID++)
+                    {
+                        if (gamepad.buttons[buttonID].pressed && !this.lastState)
+                        {
+                            this.bindMode = false;
+                            this.gamepadID = gamepadID;
+                            this.index = buttonID;
+                            this.buttonType = 0;
+                            this.lastState == true;
+                            this.controller.buttonWasBound({});
+                            return;
+                        }
+                    }
+
+                    for (var buttonID = 0; buttonID < gamepad.axes.length; buttonID++)
+                    {
+                        if (Math.abs(gamepad.axes[buttonID].value) > 0.5)
+                        {
+                            this.bindMode = false;
+                            this.gamepadID = gamepadID;
+                            this.index = buttonID;
+                            this.buttonType = gamepad.axes[buttonID].value > 0 ? 1 : 2;
+                            this.lastState == Math.abs(gamepad.axes[buttonID].value);
+                            this.controller.buttonWasBound({});
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            var gamepad = navigator.getGamepads()[this.gamepadID];
+            if (gamepad)
+            {
+                if (this.buttonType == 0)
+                {
+                    var state = gamepad.buttons[this.index].pressed;
+                    if (!this.lastState && state)
+                    {
+                        this.keyDown.call(this.controller);
+                        this.controller.anyKeyDown();
+                    }
+                    else if (this.lastState && !state)
+                    {
+                        this.keyUp.call(this.controller);
+                        this.controller.anyKeyUp();
+                    }
+                    this.lastState = state;
+                }
+                else
+                {
+                    var state = gamepad.axes[this.index].value * ((this.buttonType == 1) ? 1 : -1);
+                    if (this.lastState > 0.5 && state <= 0.5)
+                    {
+                        this.keyUp.call(this.controller);
+                        this.controller.anyKeyUp();
+                    }
+                    else if (this.lastState <= 0.5 && state > 0.5)
+                    {
+                        this.keyDown.call(this.controller);
+                        this.controller.anyKeyDown();
+                    }
+                    this.lastState = state;
+                }
+            }
+        }
 	}
 };
-
-gamepads = [];
 
 var gamepadSupportAvailable = !!navigator.getGamepads;
-if (gamepadSupportAvailable)
-{
-	var gps = navigator.getGamepads();
-	for (var i=0; i<gps.length; i++)
-	{
-		if (typeof gps[i] !== 'undefined')
-			gamepads.push(gps[i]);
-	}
-}
 
-function gamepadConnected(e)
-{
-	gamepads.push(event.gamepad);
-};
-
-function gamepadDisconnected(e)
-{
-	listIndex = gamepads.indexOf(e.gamepad);
-	if (listIndex !== -1)
-		gamepads.splice(listIndex,1);
-};
 
 window.addEventListener("gamepadconnected", gamepadConnected);
 window.addEventListener("gamepaddisconnected", gamepadDisconnected);

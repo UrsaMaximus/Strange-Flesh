@@ -611,13 +611,13 @@ GamepadButtonMonitor.prototype.Update = function()
 
                     for (var buttonID = 0; buttonID < gamepad.axes.length; buttonID++)
                     {
-                        if (Math.abs(gamepad.axes[buttonID].value) > 0.5)
+                        if (Math.abs(gamepad.axes[buttonID]) > 0.5)
                         {
                             this.bindMode = false;
                             this.gamepadID = gamepadID;
                             this.index = buttonID;
-                            this.buttonType = gamepad.axes[buttonID].value > 0 ? 1 : 2;
-                            this.lastState == Math.abs(gamepad.axes[buttonID].value);
+                            this.buttonType = ((gamepad.axes[buttonID] > 0) ? 1 : 2);
+                            this.lastState == Math.abs(gamepad.axes[buttonID]);
                             this.controller.buttonWasBound({});
                             return;
                         }
@@ -647,7 +647,7 @@ GamepadButtonMonitor.prototype.Update = function()
                 }
                 else
                 {
-                    var state = gamepad.axes[this.index].value * ((this.buttonType == 1) ? 1 : -1);
+                    var state = gamepad.axes[this.index] * ((this.buttonType == 1) ? 1 : -1);
                     if (this.lastState > 0.5 && state <= 0.5)
                     {
                         this.keyUp.call(this.controller);
